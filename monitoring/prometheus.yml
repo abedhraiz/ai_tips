@@ -1,0 +1,78 @@
+# Prometheus Configuration for AI Tips
+# Collects metrics from all services
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'ai-tips'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "alerts.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Customer Service System
+  - job_name: 'customer-service'
+    static_configs:
+      - targets: ['customer-service:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Manager Assistant
+  - job_name: 'manager-assistant'
+    static_configs:
+      - targets: ['manager-assistant:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # IT Operations
+  - job_name: 'it-operations'
+    static_configs:
+      - targets: ['it-operations:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # Market Intelligence
+  - job_name: 'market-intelligence'
+    static_configs:
+      - targets: ['market-intelligence:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Business Intelligence
+  - job_name: 'business-intelligence'
+    static_configs:
+      - targets: ['business-intelligence:8000']
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # Redis
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+
+  # PostgreSQL
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+
+  # Elasticsearch
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch:9200']
+    metrics_path: '/_prometheus/metrics'

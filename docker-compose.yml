@@ -1,0 +1,292 @@
+# AI Tips - Docker Compose Configuration
+# Provides multiple service configurations for different use cases
+
+version: '3.8'
+
+services:
+  # Base AI Tips service
+  ai-tips:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-base
+    env_file:
+      - .env
+    volumes:
+      - ./examples:/app/examples:ro
+      - ./docs:/app/docs:ro
+      - ai-tips-cache:/home/appuser/.cache/ai_tips
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+
+  # Customer Service System
+  customer-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-customer-service
+    command: python examples/use-cases/customer_service/customer_service_system.py
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=customer-service
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./examples/use-cases/customer_service:/app/examples/use-cases/customer_service
+      - customer-service-logs:/app/logs
+    ports:
+      - "8001:8000"
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+
+  # Manager Assistant System
+  manager-assistant:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-manager-assistant
+    command: python examples/use-cases/manager_assistant/manager_assistant.py
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=manager-assistant
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./examples/use-cases/manager_assistant:/app/examples/use-cases/manager_assistant
+      - manager-assistant-logs:/app/logs
+    ports:
+      - "8002:8000"
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+
+  # IT Operations System
+  it-operations:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-it-operations
+    command: python examples/use-cases/it_operations/it_operations.py
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=it-operations
+      - LOG_LEVEL=INFO
+      - MONITORING_INTERVAL=30
+    volumes:
+      - ./examples/use-cases/it_operations:/app/examples/use-cases/it_operations
+      - it-operations-logs:/app/logs
+    ports:
+      - "8003:8000"
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+      - prometheus
+
+  # Market Intelligence System
+  market-intelligence:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-market-intelligence
+    command: python examples/use-cases/market_intelligence/market_intelligence.py
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=market-intelligence
+      - LOG_LEVEL=INFO
+      - COLLECTION_INTERVAL=3600
+    volumes:
+      - ./examples/use-cases/market_intelligence:/app/examples/use-cases/market_intelligence
+      - market-intelligence-logs:/app/logs
+      - market-intelligence-data:/app/data
+    ports:
+      - "8004:8000"
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+      - elasticsearch
+
+  # Business Intelligence System
+  business-intelligence:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-business-intelligence
+    command: python examples/use-cases/business_intelligence/business_intelligence.py
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=business-intelligence
+      - LOG_LEVEL=INFO
+      - ETL_SCHEDULE=0 */6 * * *
+    volumes:
+      - ./examples/use-cases/business_intelligence:/app/examples/use-cases/business_intelligence
+      - business-intelligence-logs:/app/logs
+      - business-intelligence-data:/app/data
+    ports:
+      - "8005:8000"
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - redis
+      - postgres
+      - elasticsearch
+
+  # Supporting Services
+  
+  # Redis - Caching and message queue
+  redis:
+    image: redis:7-alpine
+    container_name: ai-tips-redis
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-changeme}
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # PostgreSQL - Data storage
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-tips-postgres
+    environment:
+      - POSTGRES_DB=ai_tips
+      - POSTGRES_USER=ai_tips
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_tips"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Elasticsearch - Search and analytics
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: ai-tips-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Prometheus - Metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ai-tips-prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+
+  # Grafana - Metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ai-tips-grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD:-admin}
+      - GF_INSTALL_PLUGINS=redis-datasource
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # Jupyter Notebook - Interactive development
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ai-tips:latest
+    container_name: ai-tips-jupyter
+    command: jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+    env_file:
+      - .env
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./examples/notebooks:/app/examples/notebooks
+      - jupyter-data:/home/appuser/.jupyter
+    networks:
+      - ai-tips-network
+    restart: unless-stopped
+
+networks:
+  ai-tips-network:
+    driver: bridge
+
+volumes:
+  ai-tips-cache:
+  customer-service-logs:
+  manager-assistant-logs:
+  it-operations-logs:
+  market-intelligence-logs:
+  market-intelligence-data:
+  business-intelligence-logs:
+  business-intelligence-data:
+  redis-data:
+  postgres-data:
+  elasticsearch-data:
+  prometheus-data:
+  grafana-data:
+  jupyter-data:

@@ -1,0 +1,26 @@
+# Requirements for Business Intelligence Use Case
+
+# Core dependencies
+python>=3.8
+asyncio>=3.4.3
+
+# For real implementations, add:
+# openai>=1.0.0
+# anthropic>=0.8.0
+# langchain>=0.1.0
+
+# Data processing
+# pandas>=2.0.0
+# numpy>=1.24.0
+
+# Business data connectors (when integrating with real systems)
+# salesforce-api>=1.0.0
+# hubspot-api-client>=8.0.0
+
+# Database
+# sqlalchemy>=2.0.0
+# psycopg2-binary>=2.9.0
+
+# Visualization (for dashboards)
+# plotly>=5.17.0
+# matplotlib>=3.7.0

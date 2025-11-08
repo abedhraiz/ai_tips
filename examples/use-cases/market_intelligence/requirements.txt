@@ -1,0 +1,22 @@
+# Requirements for Market Intelligence Use Case
+
+# Core dependencies
+python>=3.8
+asyncio>=3.4.3
+
+# For real implementations, add:
+# openai>=1.0.0
+# anthropic>=0.8.0
+# langchain>=0.1.0
+
+# Data processing
+# pandas>=2.0.0
+# numpy>=1.24.0
+
+# API integration (when connecting to real data sources)
+# requests>=2.31.0
+# aiohttp>=3.9.0
+
+# Database (for storing intelligence)
+# sqlalchemy>=2.0.0
+# redis>=5.0.0

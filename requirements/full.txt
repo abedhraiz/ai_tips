@@ -1,0 +1,74 @@
+# Full Installation - All Features
+# Install with: pip install -r requirements/full.txt
+
+-r core.txt
+
+# AI/ML Frameworks
+torch>=2.0.0
+transformers>=4.35.0
+diffusers>=0.25.0
+accelerate>=0.25.0
+
+# Additional AI APIs
+google-generativeai>=0.3.0
+cohere>=4.37
+
+# LangChain Ecosystem
+langchain>=0.1.0
+langchain-community>=0.0.10
+langchain-openai>=0.0.2
+
+# Vector Stores
+chromadb>=0.4.18
+faiss-cpu>=1.7.4
+qdrant-client>=1.7.0
+pinecone-client>=3.0.0
+weaviate-client>=3.25.0
+
+# Embeddings
+sentence-transformers>=2.2.2
+
+# Computer Vision
+opencv-python>=4.8.0
+pillow>=10.0.0
+segment-anything>=1.0
+ultralytics>=8.0.0
+
+# Image Generation
+controlnet-aux>=0.0.6
+
+# Graph Neural Networks
+torch-geometric>=2.4.0
+networkx>=3.0
+dgl>=1.1.0
+
+# Reinforcement Learning
+gymnasium>=0.29.0
+stable-baselines3>=2.2.0
+
+# Data Science
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+scikit-learn>=1.3.0
+
+# Async & Web
+aiohttp>=3.9.0
+fastapi>=0.104.0
+uvicorn>=0.24.0
+websockets>=12.0
+
+# Utilities
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+tqdm>=4.66.0
+requests>=2.31.0
+
+# Monitoring & Logging
+tensorboard>=2.15.0
+wandb>=0.16.0
+
+# Database
+sqlalchemy>=2.0.0
+redis>=5.0.0

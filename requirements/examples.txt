@@ -1,0 +1,21 @@
+# Examples Dependencies
+# Install with: pip install -r requirements/examples.txt
+# This includes core + dependencies needed to run all examples
+
+-r core.txt
+
+# For multi-model examples
+torch>=2.0.0
+transformers>=4.35.0
+
+# For communication examples  
+asyncio-mqtt>=0.16.0
+
+# For use case examples
+pandas>=2.0.0
+
+# Image processing (for VLM examples)
+pillow>=10.0.0
+
+# Async support
+aiohttp>=3.9.0
