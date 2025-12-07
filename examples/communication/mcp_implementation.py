@@ -13,7 +13,7 @@ MCP enables:
 """
 
 import json
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
 import os
@@ -43,7 +43,7 @@ class Tool:
     name: str
     description: str
     parameters: Dict[str, Any]
-    handler: callable
+    handler: Callable[..., Any]
 
 
 class MCPServer:

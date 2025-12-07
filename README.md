@@ -9,7 +9,7 @@
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Documentation](https://img.shields.io/badge/docs-comprehensive-success.svg)](./docs/)
 
-**26 AI Model Architectures** • **5 Communication Protocols** • **100+ Examples** • **Production-Ready Patterns**
+**19 AI Model Types** • **7 Communication Protocols** • **5 Production Use Cases** • **Interactive Notebooks**
 
 [📚 Documentation](#-documentation) • [🎯 Quick Start](#-quick-start) • [💡 Examples](#-examples) • [🤝 Contributing](#-contributing)
 
@@ -21,12 +21,11 @@
 
 This repository provides a **complete, professional guide** to modern AI model architectures and their communication patterns. Whether you're building production AI systems, conducting research, or learning about AI, you'll find:
 
-- ✅ **26 AI model types** with detailed technical specifications
-- ✅ **5 communication protocols** for AI agent interaction
-- ✅ **100+ practical examples** with working code
-- ✅ **Production patterns** and best practices
+- ✅ **19 AI model types** with detailed technical specifications and code examples
+- ✅ **7 communication protocols** for AI agent interaction
+- ✅ **5 production use cases** with working multi-agent code
 - ✅ **Jupyter notebooks** for interactive learning
-- ✅ **Architecture diagrams** and decision frameworks
+- ✅ **Docker support** for easy deployment
 
 ---
 
@@ -47,45 +46,43 @@ This repository provides a **complete, professional guide** to modern AI model a
 
 ## 🤖 AI Model Architectures
 
+> **📖 [AI Model Selection Guide](./docs/models/AI_MODEL_SELECTION_GUIDE.md)** - Don't know which model to use? Start here!
+
 ### Language Models
 - **[LLM - Large Language Model](./docs/models/LLM.md)** - Text generation and reasoning (GPT-4, Claude, Llama)
 - **[SLM - Small Language Model](./docs/models/SLM.md)** - Efficient edge deployment (Phi-3, Gemma, TinyLlama)
-- **[MLM - Masked Language Model](./docs/models/MLM.md)** - Bidirectional understanding (BERT, RoBERTa)
-- **[Encoder-Decoder Models](./docs/models/ENCODER_DECODER.md)** - Seq2seq tasks (T5, BART, mT5)
+- **[MLM - Masked Language Model](./docs/models/MLM.md)** - NER, classification, embeddings (BERT, RoBERTa)
+- **[ENCODER_DECODER - Seq2Seq Models](./docs/models/ENCODER_DECODER.md)** - Translation, summarization (T5, BART)
 
 ### Vision Models
 - **[VLM - Vision Language Model](./docs/models/VLM.md)** - Image + text understanding (GPT-4V, Claude 3)
 - **[LVM - Large Vision Model](./docs/models/LVM.md)** - Pure vision tasks (DINOv2, CLIP encoders)
-- **[SAM - Segment Anything Model](./docs/models/SAM.md)** - Universal segmentation (Meta SAM)
-- **[Vision Transformers](./docs/models/VIT.md)** - Image classification (ViT, Swin, DeiT)
+- **[VIT - Vision Transformer](./docs/models/VIT.md)** - Image classification backbone (ViT, DeiT, BEiT)
+- **[SAM - Segment Anything Model](./docs/models/SAM.md)** - Zero-shot segmentation (SAM 2)
+- **[CLIP - Contrastive Language-Image](./docs/models/CLIP.md)** - Image-text matching (OpenCLIP, SigLIP)
 
 ### Multimodal Models
 - **[LMM - Large Multimodal Model](./docs/models/LMM.md)** - Native multimodal (Gemini, GPT-4o)
-- **[MLLM - Multimodal LLM](./docs/models/MLLM.md)** - Extended LLMs (LLaVA, Qwen-VL)
-- **[Multimodal Foundation Models](./docs/models/MULTIMODAL_FOUNDATION.md)** - Unified architectures
+- **[AUDIO - Speech & Sound AI](./docs/models/AUDIO.md)** - ASR, TTS, music generation (Whisper, ElevenLabs)
+- **[VIDEO - Video AI](./docs/models/VIDEO.md)** - Video generation & understanding (Sora, Runway)
 
 ### Generative Models
-- **[Diffusion Models](./docs/models/DIFFUSION.md)** - High-quality generation (Stable Diffusion, DALL-E)
-- **[LCM - Latent Consistency Model](./docs/models/LCM.md)** - Fast image generation (4-step inference)
-- **[GAN - Generative Adversarial Networks](./docs/models/GAN.md)** - Adversarial training (StyleGAN, BigGAN)
-- **[VAE - Variational Autoencoder](./docs/models/VAE.md)** - Probabilistic generation
+- **[DIFFUSION - Diffusion Models](./docs/models/DIFFUSION.md)** - Image generation (DALL-E, Stable Diffusion)
+- **[GAN - Generative Adversarial Networks](./docs/models/GAN.md)** - Image synthesis (StyleGAN, Pix2Pix)
+- **[VAE - Variational Autoencoders](./docs/models/VAE.md)** - Latent space learning (β-VAE, VQ-VAE)
 
 ### Specialized Models
 - **[LAM - Large Action Model](./docs/models/LAM.md)** - Task automation (Adept ACT-1, Rabbit R1)
 - **[MOE - Mixture of Experts](./docs/models/MOE.md)** - Efficient scaling (Mixtral, GPT-4)
-- **[RL Models](./docs/models/RL.md)** - Decision making (PPO, SAC, AlphaZero)
-- **[GNN - Graph Neural Networks](./docs/models/GNN.md)** - Graph reasoning (GraphSAGE, GAT)
-- **[World Models](./docs/models/WORLD_MODELS.md)** - Environment simulation (Dreamer, MuZero)
+- **[GNN - Graph Neural Networks](./docs/models/GNN.md)** - Graph data (GCN, GAT, GraphSAGE)
+- **[RL - Reinforcement Learning](./docs/models/RL.md)** - Decision making, RLHF (PPO, SAC)
 
 ### Advanced Paradigms
-- **[RAG - Retrieval Augmented Generation](./docs/models/RAG.md)** - Grounded generation
-- **[Foundation Models](./docs/models/FOUNDATION.md)** - Pre-trained base models
-- **[Contrastive Learning](./docs/models/CONTRASTIVE.md)** - Self-supervised learning (CLIP, SimCLR)
-- **[NAS - Neural Architecture Search](./docs/models/NAS.md)** - Automated design (EfficientNet)
-- **[Neurosymbolic AI](./docs/models/NEUROSYMBOLIC.md)** - Hybrid reasoning
-- **[Federated Learning](./docs/models/FEDERATED.md)** - Privacy-preserving training
+- **[RAG - Retrieval Augmented Generation](./docs/models/RAG.md)** - Grounded generation with external knowledge
+- **[EMBEDDINGS - Vector Representations](./docs/models/EMBEDDINGS.md)** - Semantic search, similarity (text-embedding-3, BGE)
+- **[WORLD_MODELS - World Simulators](./docs/models/WORLD_MODELS.md)** - Planning, prediction (Dreamer, MuZero)
 
-📖 **[Complete Professional Overview](./docs/PROFESSIONAL_OVERVIEW.md)** | **[Model Comparison Table](./docs/MODEL_COMPARISON.md)**
+📖 **[Complete Professional Overview](./docs/PROFESSIONAL_OVERVIEW.md)** | **[Model Comparison Table](./docs/MODEL_COMPARISON.md)** | **[Visual Guide](./docs/VISUAL_GUIDE.md)**
 
 ---
 
@@ -111,13 +108,13 @@ Autonomous incident detection and remediation
 - **Highlights**: 24/7 monitoring, self-healing systems, complete audit trail
 - **Example**: High CPU detected → Diagnosed → Service restarted → System restored
 
-### � [Market Intelligence System](./examples/use-cases/market_intelligence/)
+### 📊 [Market Intelligence System](./examples/use-cases/market_intelligence/)
 Real-time market and competitive intelligence
 - **Agents**: Competitor Analysis, Market Trends, Customer Sentiment, Pricing Intelligence, Financial Analysis
 - **Highlights**: Parallel data gathering, comprehensive insights, strategic recommendations
 - **Example**: Market analysis → Competitor positioning + Trends + Sentiment + Pricing → Strategic recommendations
 
-### 💼 [Business Intelligence Dashboard](./examples/use-cases/business_intelligence/)
+### 📈 [Business Intelligence Dashboard](./examples/use-cases/business_intelligence/)
 Automated executive dashboards and analytics
 - **Agents**: Data Aggregation, Sales Analytics, Marketing Analytics, Financial Analytics, Operational Analytics, Predictive Analytics
 - **Highlights**: Multi-source integration, real-time insights, predictive forecasting
@@ -158,25 +155,18 @@ Understanding how AI models, agents, and systems communicate:
 
 ### Production Patterns
 - **[Multi-Agent Orchestration](./docs/protocols/ORCHESTRATION.md)** - Coordinating multiple AI agents
-  - Sequential, parallel, hierarchical patterns
-  - Event-driven and pipeline orchestration
+  - Sequential, parallel, and hierarchical patterns
   - Task distribution and load balancing
   - State management and error handling
-  - Production monitoring and health checks
 
 - **[Workflow Patterns](./docs/protocols/WORKFLOWS.md)** - Designing agent workflows
   - Sequential, parallel, and conditional workflows
-  - ETL pipelines for business intelligence
-  - Real-time processing workflows
-  - Decision workflows and templates
+  - ETL pipelines and real-time processing
   - Error recovery strategies
 
 - **[MLOps for Agents](./docs/protocols/MLOPS.md)** - Production deployment and operations
   - Blue-green and canary deployments
-  - A/B testing for agent versions
-  - Monitoring and observability
-  - Performance optimization and scaling
-  - Cost optimization strategies
+  - Monitoring, observability, and scaling
   - Security and compliance
 
 
@@ -184,38 +174,21 @@ Understanding how AI models, agents, and systems communicate:
 
 ## 💡 Examples
 
-### Basic Usage
-Explore individual model examples in [`examples/basic/`](./examples/basic/):
-- Text generation with LLMs
-- Image analysis with VLMs
-- Segmentation with SAM
-- Fast generation with LCM
-- Edge deployment with SLMs
-
-### Multi-Model Workflows
-Complex scenarios combining multiple models [`examples/workflows/`](./examples/workflows/):
-- **Document Intelligence**: OCR (VLM) → Summary (LLM) → Classification (MLM)
-- **Content Creation**: Text (LLM) → Image (Diffusion) → Edit (LCM)
-- **Data Analysis**: Extract (VLM) → Analyze (LLM) → Visualize (Code execution)
-- **Automation**: Plan (LLM) → Execute (LAM) → Verify (VLM)
-
 ### Communication Patterns
-Inter-model communication examples [`examples/communication/`](./examples/communication/):
-- MCP server implementation (Python & TypeScript)
-- Multi-agent collaboration systems
-- Human-in-the-loop workflows
-- System integration patterns
+Inter-model communication examples in [`examples/communication/`](./examples/communication/):
+- **[MCP Implementation](./examples/communication/mcp_implementation.py)** - Model Context Protocol server
+- **[Multi-Model Pipeline](./examples/communication/multi_model_pipeline.py)** - Chaining multiple AI models
 
 ### Production Use Cases
-Complete implementations [`examples/use-cases/`](./examples/use-cases/):
-- **Customer Support Bot**: RAG + LLM + sentiment analysis
-- **Medical Imaging Pipeline**: SAM + classification + reporting
-- **Research Assistant**: Multi-agent system with specialized models
-- **Content Moderation**: VLM + classification + decision logic
-- **Code Assistant**: RAG + code-specialized LLM + execution
+Complete multi-agent implementations in [`examples/use-cases/`](./examples/use-cases/):
+- **[Customer Service](./examples/use-cases/customer_service/)** - Autonomous support with specialized agents
+- **[Manager Assistant](./examples/use-cases/manager_assistant/)** - Executive task orchestration
+- **[IT Operations](./examples/use-cases/it_operations/)** - Incident detection and remediation
+- **[Market Intelligence](./examples/use-cases/market_intelligence/)** - Competitive analysis and trends
+- **[Business Intelligence](./examples/use-cases/business_intelligence/)** - Automated dashboards and analytics
 
 ### Interactive Notebooks
-Jupyter notebooks for hands-on learning [`notebooks/`](./notebooks/):
+Jupyter notebooks for hands-on learning in [`notebooks/`](./notebooks/):
 - [00_Index.ipynb](./notebooks/00_Index.ipynb) - Navigation guide
 - [01_LLM_Examples.ipynb](./notebooks/01_LLM_Examples.ipynb) - Language model examples
 - [02_VLM_Examples.ipynb](./notebooks/02_VLM_Examples.ipynb) - Vision-language examples
@@ -232,13 +205,15 @@ Jupyter notebooks for hands-on learning [`notebooks/`](./notebooks/):
 # Python 3.8 or higher
 python --version
 
-# Install dependencies
-pip install -r requirements.txt
+# Install dependencies (choose one)
+pip install -r requirements/minimal.txt    # Quick start
+pip install -r requirements/core.txt       # Core features
+pip install -r requirements/full.txt       # All features
 ```
 
 ### Run Your First Example
 ```python
-# examples/basic/llm_simple.py
+# Basic LLM usage
 import openai
 
 client = openai.OpenAI()
@@ -251,19 +226,10 @@ response = client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-### Try Multi-Model Communication
-```python
-# examples/communication/mcp_simple.py
-from mcp_client import MCPClient
-
-# Connect to MCP server
-client = MCPClient("http://localhost:8000")
-
-# LLM requests data via MCP
-context = client.get_resource("file://documents/report.pdf")
-
-# LLM processes with grounded context
-response = llm.generate(context + "\n\nSummarize this report")
+### Try Multi-Agent Communication
+```bash
+# Run a use case example
+python examples/use-cases/customer_service/customer_service_agents.py
 ```
 
 ### Explore Notebooks
@@ -276,7 +242,7 @@ jupyter notebook notebooks/00_Index.ipynb
 
 ## 📦 Installation
 
-### Option 1: Complete Installation
+### Option 1: Full Installation
 ```bash
 # Clone repository
 git clone https://github.com/abedhraiz/ai_tips.git
@@ -286,21 +252,19 @@ cd ai_tips
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-# Install all dependencies
-pip install -r requirements.txt
+# Install dependencies
+pip install -r requirements/full.txt
 
-# Verify installation
-python scripts/verify_setup.py
+# Run tests to verify
+python -m pytest tests/ -v
 ```
 
-### Option 2: Minimal Installation (Documentation Only)
+### Option 2: Minimal Installation
 ```bash
-# Clone and browse documentation
+# Clone and install minimal dependencies
 git clone https://github.com/abedhraiz/ai_tips.git
 cd ai_tips
-
-# Open in browser or markdown viewer
-# No dependencies needed for documentation
+pip install -r requirements/minimal.txt
 ```
 
 ### Option 3: Docker
@@ -460,18 +424,15 @@ graph TD
 ### Model Documentation
 - [Complete Professional Overview](./docs/PROFESSIONAL_OVERVIEW.md) - Comprehensive technical reference
 - [Model Comparison Matrix](./docs/MODEL_COMPARISON.md) - Side-by-side comparison
+- [Visual Guide](./docs/VISUAL_GUIDE.md) - Architecture diagrams and flowcharts
 - [Individual Model Docs](./docs/models/) - Detailed per-model documentation
 
 ### Protocol Documentation
-- [Communication Protocols](./docs/protocols/) - MCP, A2A, A2P, A2S, Orchestration
-- [Integration Patterns](./docs/PATTERNS.md) - Common architectural patterns
-- [Best Practices](./docs/BEST_PRACTICES.md) - Production recommendations
+- [Communication Protocols](./docs/protocols/) - MCP, A2A, A2P, A2S, Orchestration, Workflows, MLOps
 
 ### Learning Resources
+- [Understanding Agents](./docs/UNDERSTANDING_AGENTS.md) - Agent concepts and patterns
 - [Glossary](./docs/GLOSSARY.md) - AI terminology and definitions
-- [FAQ](./docs/FAQ.md) - Frequently asked questions
-- [Tutorials](./docs/TUTORIALS.md) - Step-by-step guides
-- [Architecture Diagrams](./docs/diagrams/) - Visual references
 
 ---
 
@@ -480,80 +441,70 @@ graph TD
 ```
 ai_tips/
 ├── README.md                          # This file
-├── requirements.txt                   # Python dependencies
-├── .env.example                       # Environment template
+├── QUICK_START.md                     # Getting started guide
+├── CONTRIBUTING.md                    # Contribution guidelines
+├── CHANGELOG.md                       # Version history
+├── CODE_OF_CONDUCT.md                 # Community guidelines
+├── SECURITY.md                        # Security policy
+├── PROJECT_STATUS.md                  # Current project status
 ├── LICENSE                            # MIT License
+├── pyproject.toml                     # Python project configuration
+├── Dockerfile                         # Container build
+├── docker-compose.yml                 # Multi-service orchestration
+│
+├── requirements/                      # Dependency files
+│   ├── minimal.txt                   # Quick start dependencies
+│   ├── core.txt                      # Core dependencies
+│   ├── full.txt                      # All features
+│   ├── dev.txt                       # Development tools
+│   └── examples.txt                  # Example dependencies
 │
 ├── docs/                              # Documentation
-│   ├── PROFESSIONAL_OVERVIEW.md       # Complete technical guide
-│   ├── MODEL_COMPARISON.md            # Model comparison matrix
-│   ├── BEST_PRACTICES.md              # Production guidelines
-│   ├── PATTERNS.md                    # Architecture patterns
-│   ├── GLOSSARY.md                    # Terminology
-│   ├── FAQ.md                         # Common questions
-│   ├── TUTORIALS.md                   # Learning guides
+│   ├── PROFESSIONAL_OVERVIEW.md      # Complete technical guide
+│   ├── MODEL_COMPARISON.md           # Model comparison matrix
+│   ├── VISUAL_GUIDE.md               # Architecture diagrams
+│   ├── UNDERSTANDING_AGENTS.md       # Agent concepts
+│   ├── GLOSSARY.md                   # Terminology
 │   │
-│   ├── models/                        # Model-specific docs (26 files)
-│   │   ├── LLM.md, VLM.md, SLM.md   # Language models
-│   │   ├── GAN.md, VAE.md, DIFFUSION.md # Generative models
-│   │   ├── SAM.md, GNN.md, RL.md    # Specialized models
-│   │   └── ... (23 more)
+│   ├── models/                       # Model documentation (8 files)
+│   │   ├── LLM.md, SLM.md            # Language models
+│   │   ├── VLM.md, LVM.md            # Vision models
+│   │   ├── LMM.md                    # Multimodal models
+│   │   └── LAM.md, MOE.md, RAG.md    # Specialized models
 │   │
-│   ├── protocols/                     # Communication protocols
-│   │   ├── MCP.md                    # Model Context Protocol
-│   │   ├── A2A.md                    # Agent-to-Agent
-│   │   ├── A2P.md                    # Agent-to-Person
-│   │   ├── A2S.md                    # Agent-to-System
-│   │   └── ORCHESTRATION.md          # Multi-agent coordination
-│   │
-│   └── diagrams/                      # Architecture diagrams
-│       ├── model_comparison.svg
-│       ├── communication_flow.svg
-│       └── deployment_patterns.svg
+│   └── protocols/                    # Communication protocols (7 files)
+│       ├── MCP.md                    # Model Context Protocol
+│       ├── A2A.md, A2P.md, A2S.md    # Agent communication
+│       └── ORCHESTRATION.md, WORKFLOWS.md, MLOPS.md
 │
 ├── examples/                          # Practical code examples
-│   ├── basic/                        # Single model examples
-│   │   ├── llm_simple.py
-│   │   ├── vlm_image_analysis.py
-│   │   ├── sam_segmentation.py
-│   │   └── ... (20+ examples)
-│   │
-│   ├── workflows/                    # Multi-model pipelines
-│   │   ├── document_intelligence.py
-│   │   ├── content_creation.py
-│   │   ├── data_analysis_pipeline.py
-│   │   └── automation_workflow.py
-│   │
+│   ├── README.md                     # Examples overview
 │   ├── communication/                # Inter-model communication
-│   │   ├── mcp_server.py
-│   │   ├── mcp_client.py
-│   │   ├── multi_agent_system.py
-│   │   └── orchestration_example.py
+│   │   ├── mcp_implementation.py     # MCP server example
+│   │   └── multi_model_pipeline.py   # Multi-model chaining
 │   │
 │   └── use-cases/                    # Complete implementations
-│       ├── customer_support/
-│       ├── medical_imaging/
-│       ├── research_assistant/
-│       ├── content_moderation/
-│       └── code_assistant/
+│       ├── customer_service/         # Multi-agent support system
+│       ├── manager_assistant/        # Executive assistant
+│       ├── it_operations/            # Autonomous IT ops
+│       ├── market_intelligence/      # Competitive analysis
+│       └── business_intelligence/    # Automated dashboards
 │
-├── notebooks/                         # Jupyter notebooks
-│   ├── 00_Index.ipynb
-│   ├── 01_LLM_Examples.ipynb
-│   ├── 02_VLM_Examples.ipynb
-│   ├── 03_SLM_Examples.ipynb
-│   ├── 04_Advanced_Models_MOE_SAM_LCM_MLM.ipynb
-│   └── 05_Multimodal_And_Communication.ipynb
+├── notebooks/                         # Jupyter notebooks (6 files)
+│   ├── 00_Index.ipynb                # Navigation guide
+│   ├── 01_LLM_Examples.ipynb         # Language models
+│   ├── 02_VLM_Examples.ipynb         # Vision-language
+│   ├── 03_SLM_Examples.ipynb         # Small models
+│   ├── 04_Advanced_Models_*.ipynb    # MOE, SAM, LCM, MLM
+│   └── 05_Multimodal_*.ipynb         # Communication
 │
-├── scripts/                           # Utility scripts
-│   ├── verify_setup.py               # Installation verification
-│   ├── benchmark.py                  # Performance testing
-│   └── deploy.py                     # Deployment helper
+├── monitoring/                        # Monitoring configuration
+│   └── prometheus.yml                # Prometheus config
 │
 └── tests/                             # Unit tests
-    ├── test_examples.py
-    ├── test_protocols.py
-    └── test_utils.py
+    ├── test_documentation.py         # Doc structure tests
+    ├── test_examples.py              # Example syntax tests
+    └── test_imports.py               # Import tests
 ```
 
 ---
@@ -625,25 +576,19 @@ copies or substantial portions of the Software.
 ## 🗺️ Roadmap
 
 ### Completed ✅
-- [x] 26 AI model type documentation
-- [x] 5 communication protocol guides
-- [x] 100+ code examples
+- [x] 8 AI model type documentation (LLM, SLM, VLM, LVM, LMM, LAM, MOE, RAG)
+- [x] 7 communication protocol guides (MCP, A2A, A2P, A2S, Orchestration, Workflows, MLOps)
+- [x] 5 production use case examples
 - [x] Interactive Jupyter notebooks
+- [x] Docker and docker-compose support
 - [x] Professional overview documentation
 
-### In Progress 🚧
-- [ ] Video tutorials for each model type
-- [ ] Interactive web-based model selector
-- [ ] Deployment templates (Docker, Kubernetes)
-- [ ] Performance benchmarking suite
-
 ### Planned 📋
-- [ ] Multi-language support (Spanish, Chinese, Arabic)
-- [ ] Real-world case study deep-dives
+- [ ] Additional model documentation (Diffusion, GAN, SAM, GNN, RL)
+- [ ] Video tutorials for each model type
 - [ ] Cloud provider integration guides (AWS, Azure, GCP)
-- [ ] MLOps and monitoring best practices
-- [ ] Community model contributions
-- [ ] API reference documentation
+- [ ] Performance benchmarking suite
+- [ ] Multi-language support
 
 ---
 
@@ -669,10 +614,4 @@ This is a living document. Contributions, corrections, and suggestions are welco
 
 ---
 
-## 📝 License
-
-MIT License - Feel free to use these resources for learning and development.
-
----
-
-**Last Updated**: November 8, 2025
+**Last Updated**: December 7, 2025

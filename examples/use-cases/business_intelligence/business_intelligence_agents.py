@@ -546,7 +546,7 @@ class BusinessIntelligenceOrchestrator:
         # Phase 2: Parallel Analytics
         print("\n[Phase 2] Running Analytics Agents in Parallel...")
         
-        analytics_results = await asyncio.gather(
+        sales_res, marketing_res, finance_res, ops_res = await asyncio.gather(
             self.sales_agent.analyze(data),
             self.marketing_agent.analyze(data),
             self.finance_agent.analyze(data),
@@ -559,9 +559,29 @@ class BusinessIntelligenceOrchestrator:
         
         predictive_result = await self.predictive_agent.analyze(data)
         
-        # Filter out any errors
-        reports = [r for r in analytics_results if not isinstance(r, Exception)]
-        reports.append(predictive_result)
+        # Collect valid reports
+        reports = []
+        detailed_reports = {}
+        
+        if not isinstance(sales_res, Exception):
+            reports.append(sales_res)
+            detailed_reports["sales"] = sales_res
+            
+        if not isinstance(marketing_res, Exception):
+            reports.append(marketing_res)
+            detailed_reports["marketing"] = marketing_res
+            
+        if not isinstance(finance_res, Exception):
+            reports.append(finance_res)
+            detailed_reports["finance"] = finance_res
+            
+        if not isinstance(ops_res, Exception):
+            reports.append(ops_res)
+            detailed_reports["operations"] = ops_res
+            
+        if not isinstance(predictive_result, Exception):
+            reports.append(predictive_result)
+            detailed_reports["predictive"] = predictive_result
         
         # Phase 4: Executive Summary
         print("\n[Phase 4] Compiling Executive Summary...")
@@ -577,13 +597,7 @@ class BusinessIntelligenceOrchestrator:
             "processing_time_seconds": processing_time,
             "reports_generated": len(reports),
             "executive_summary": executive_summary,
-            "detailed_reports": {
-                "sales": reports[0] if len(reports) > 0 else None,
-                "marketing": reports[1] if len(reports) > 1 else None,
-                "finance": reports[2] if len(reports) > 2 else None,
-                "operations": reports[3] if len(reports) > 3 else None,
-                "predictive": reports[4] if len(reports) > 4 else None
-            },
+            "detailed_reports": detailed_reports,
             "data_snapshot": data
         }
         

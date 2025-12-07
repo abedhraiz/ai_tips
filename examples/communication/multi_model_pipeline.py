@@ -20,9 +20,6 @@ import json
 import os
 from typing import Dict, List, Any
 
-# Configure APIs
-openai_client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
-
 
 class MultiModelPipeline:
     """
@@ -37,11 +34,14 @@ class MultiModelPipeline:
     def __init__(self):
         print("Initializing Multi-Model Pipeline...")
         
+        # Configure APIs
+        self.openai_client = openai.OpenAI(api_key=os.environ.get('OPENAI_API_KEY'))
+        
         # Model 1: Vision Language Model (VLM) for OCR and understanding
-        self.vlm = openai_client
+        self.vlm = self.openai_client
         
         # Model 2: Large Language Model (LLM) for summarization
-        self.llm = openai_client
+        self.llm = self.openai_client
         
         # Model 3: Masked Language Model (MLM) for entity extraction
         print("Loading NER model...")

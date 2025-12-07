@@ -2,8 +2,6 @@
 # Install with: pip install -r requirements/minimal.txt
 # For trying out basic examples quickly
 
-python>=3.8
-
 # Essential only
 openai>=1.0.0
 python-dotenv>=1.0.0

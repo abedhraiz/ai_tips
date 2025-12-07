@@ -1,8 +1,6 @@
 # Requirements for Market Intelligence Use Case
 
 # Core dependencies
-python>=3.8
-asyncio>=3.4.3
 
 # For real implementations, add:
 # openai>=1.0.0

@@ -1,9 +1,6 @@
 # Core Dependencies - Minimal Installation
 # Install with: pip install -r requirements/core.txt
 
-# Python version requirement
-python>=3.8
-
 # Essential AI/ML
 openai>=1.0.0
 anthropic>=0.8.0

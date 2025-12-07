@@ -28,7 +28,7 @@ services:
       dockerfile: Dockerfile
     image: ai-tips:latest
     container_name: ai-tips-customer-service
-    command: python examples/use-cases/customer_service/customer_service_system.py
+    command: python examples/use-cases/customer_service/customer_service_agents.py
     env_file:
       - .env
     environment:
@@ -78,7 +78,7 @@ services:
       dockerfile: Dockerfile
     image: ai-tips:latest
     container_name: ai-tips-it-operations
-    command: python examples/use-cases/it_operations/it_operations.py
+    command: python examples/use-cases/it_operations/it_operations_automation.py
     env_file:
       - .env
     environment:
@@ -105,7 +105,7 @@ services:
       dockerfile: Dockerfile
     image: ai-tips:latest
     container_name: ai-tips-market-intelligence
-    command: python examples/use-cases/market_intelligence/market_intelligence.py
+    command: python examples/use-cases/market_intelligence/market_intelligence_agents.py
     env_file:
       - .env
     environment:
@@ -133,7 +133,7 @@ services:
       dockerfile: Dockerfile
     image: ai-tips:latest
     container_name: ai-tips-business-intelligence
-    command: python examples/use-cases/business_intelligence/business_intelligence.py
+    command: python examples/use-cases/business_intelligence/business_intelligence_agents.py
     env_file:
       - .env
     environment:
@@ -265,7 +265,7 @@ services:
     ports:
       - "8888:8888"
     volumes:
-      - ./examples/notebooks:/app/examples/notebooks
+      - ./notebooks:/app/notebooks
       - jupyter-data:/home/appuser/.jupyter
     networks:
       - ai-tips-network
