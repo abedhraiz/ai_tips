@@ -14,11 +14,15 @@ Demonstrates:
 
 import asyncio
 import json
+import logging
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 import random
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class IntelligenceType(Enum):
@@ -663,6 +667,12 @@ async def main():
     """
     Demonstrate market intelligence multi-agent system.
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
     
     # Initialize orchestrator
     orchestrator = MarketIntelligenceOrchestrator()

@@ -17,11 +17,15 @@ Key Features:
 
 import asyncio
 import json
+import logging
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from enum import Enum
 from datetime import datetime
 import openai
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class AgentType(Enum):
@@ -558,6 +562,12 @@ async def main():
     """
     Demonstrate autonomous multi-agent customer service system.
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
     
     # Get API key from environment or use placeholder
     import os

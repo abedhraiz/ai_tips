@@ -11,11 +11,15 @@ This showcases Agent-to-Agent (A2A) communication for complex business workflows
 
 import asyncio
 import json
+import logging
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 import openai
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class AgentRole(Enum):
@@ -513,6 +517,12 @@ async def main():
     """
     Demonstrate manager assistant multi-agent system.
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
     
     import os
     api_key = os.getenv("OPENAI_API_KEY", "your-api-key-here")

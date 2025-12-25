@@ -8,9 +8,19 @@ import pytest
 import asyncio
 from pathlib import Path
 import sys
+import importlib.util
 
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
+
+def import_module_from_path(module_name, file_path):
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    if spec and spec.loader:
+        module = importlib.util.module_from_spec(spec)
+        sys.modules[module_name] = module
+        spec.loader.exec_module(module)
+        return module
+    return None
 
 
 @pytest.mark.asyncio
@@ -87,10 +97,17 @@ async def test_business_intelligence_structure():
     try:
         file_path = project_root / 'examples' / 'use-cases' / 'business_intelligence' / 'business_intelligence_agents.py'
         if file_path.exists():
+            # Verify syntax
             with open(file_path, 'r', encoding='utf-8') as f:
                 code = f.read()
                 compile(code, str(file_path), 'exec')
-            print("✓ Business intelligence - syntax OK")
+            
+            # Verify import
+            module = import_module_from_path("business_intelligence_agents", file_path)
+            assert module is not None
+            assert hasattr(module, "BusinessIntelligenceOrchestrator")
+            
+            print("✓ Business intelligence - syntax and import OK")
         else:
             pytest.skip("Business intelligence example not found")
     except Exception as e:
@@ -102,10 +119,18 @@ def test_mcp_implementation_structure():
     try:
         file_path = project_root / 'examples' / 'communication' / 'mcp_implementation.py'
         if file_path.exists():
+            # Verify syntax
             with open(file_path, 'r', encoding='utf-8') as f:
                 code = f.read()
                 compile(code, str(file_path), 'exec')
-            print("✓ MCP implementation - syntax OK")
+            
+            # Verify import
+            module = import_module_from_path("mcp_implementation", file_path)
+            assert module is not None
+            assert hasattr(module, "MCPServer")
+            assert hasattr(module, "MCPClient")
+            
+            print("✓ MCP implementation - syntax and import OK")
         else:
             pytest.skip("MCP implementation not found")
     except Exception as e:

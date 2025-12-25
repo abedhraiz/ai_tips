@@ -14,11 +14,15 @@ Agents communicate via A2A protocol without human intervention.
 
 import asyncio
 import json
+import logging
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 import random
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class Severity(Enum):
@@ -540,6 +544,12 @@ async def main():
     """
     Demonstrate IT operations automation with A2A agents.
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
     
     orchestrator = ITOperationsOrchestrator()
     

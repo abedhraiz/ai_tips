@@ -13,10 +13,14 @@ MCP enables:
 """
 
 import json
+import logging
 from typing import Dict, List, Any, Optional, Callable
 from dataclasses import dataclass
 from enum import Enum
 import os
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class ResourceType(Enum):
@@ -60,22 +64,22 @@ class MCPServer:
         self.tools: Dict[str, Tool] = {}
         self.prompts: Dict[str, str] = {}
         
-        print(f"🚀 MCP Server '{name}' initialized")
+        logger.info(f"MCP Server '{name}' initialized")
     
     def register_resource(self, resource: Resource):
         """Register a resource that AI can access"""
         self.resources[resource.uri] = resource
-        print(f"  ✓ Registered resource: {resource.name} ({resource.uri})")
+        logger.info(f"Registered resource: {resource.name} ({resource.uri})")
     
     def register_tool(self, tool: Tool):
         """Register a tool that AI can call"""
         self.tools[tool.name] = tool
-        print(f"  ✓ Registered tool: {tool.name}")
+        logger.info(f"Registered tool: {tool.name}")
     
     def register_prompt(self, name: str, template: str):
         """Register a reusable prompt template"""
         self.prompts[name] = template
-        print(f"  ✓ Registered prompt: {name}")
+        logger.info(f"Registered prompt: {name}")
     
     def list_resources(self) -> List[Dict[str, Any]]:
         """List all available resources"""
@@ -200,7 +204,7 @@ class MCPClient:
     
     def __init__(self, server: MCPServer):
         self.server = server
-        print(f"🔌 MCP Client connected to '{server.name}'")
+        logger.info(f"MCP Client connected to '{server.name}'")
     
     def discover_resources(self) -> List[Dict[str, Any]]:
         """Discover available resources"""
@@ -258,6 +262,13 @@ def main():
     """
     Demonstrate MCP server and client usage.
     """
+    # Configure logging for the demo
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
+
     print("\n" + "="*60)
     print("MODEL CONTEXT PROTOCOL (MCP) DEMONSTRATION")
     print("="*60)

@@ -14,11 +14,15 @@ Demonstrates:
 
 import asyncio
 import json
+import logging
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 import random
+
+# Configure logging
+logger = logging.getLogger(__name__)
 
 
 class DataSource(Enum):
@@ -67,22 +71,22 @@ class DataAggregationAgent:
         # Simulated data sources
         self.data_cache = {}
         
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def aggregate_data(self, sources: List[DataSource]) -> Dict[str, Any]:
         """Aggregate data from multiple sources"""
         
-        print(f"\n📥 {self.name} aggregating data from {len(sources)} sources...")
+        logger.info(f"{self.name} aggregating data from {len(sources)} sources...")
         
         aggregated_data = {}
         
         for source in sources:
-            print(f"  • Fetching {source.value} data...")
+            logger.info(f"Fetching {source.value} data...")
             await asyncio.sleep(0.3)  # Simulate API calls
             
             aggregated_data[source.value] = self._fetch_source_data(source)
         
-        print(f"  ✓ Aggregated data from {len(sources)} sources")
+        logger.info(f"Aggregated data from {len(sources)} sources")
         
         return aggregated_data
     
@@ -174,12 +178,12 @@ class SalesAnalyticsAgent:
     
     def __init__(self, name: str = "Sales Analytics Agent"):
         self.name = name
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def analyze(self, data: Dict[str, Any]) -> BIReport:
         """Analyze sales data"""
         
-        print(f"\n📊 {self.name} analyzing sales performance...")
+        logger.info(f"{self.name} analyzing sales performance...")
         
         await asyncio.sleep(0.8)
         
@@ -242,12 +246,12 @@ class MarketingAnalyticsAgent:
     
     def __init__(self, name: str = "Marketing Analytics Agent"):
         self.name = name
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def analyze(self, data: Dict[str, Any]) -> BIReport:
         """Analyze marketing data"""
         
-        print(f"\n📈 {self.name} analyzing marketing performance...")
+        logger.info(f"{self.name} analyzing marketing performance...")
         
         await asyncio.sleep(0.8)
         
@@ -313,12 +317,12 @@ class FinancialAnalyticsAgent:
     
     def __init__(self, name: str = "Financial Analytics Agent"):
         self.name = name
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def analyze(self, data: Dict[str, Any]) -> BIReport:
         """Analyze financial data"""
         
-        print(f"\n💰 {self.name} analyzing financial health...")
+        logger.info(f"{self.name} analyzing financial health...")
         
         await asyncio.sleep(0.8)
         
@@ -378,12 +382,12 @@ class OperationalAnalyticsAgent:
     
     def __init__(self, name: str = "Operational Analytics Agent"):
         self.name = name
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def analyze(self, data: Dict[str, Any]) -> BIReport:
         """Analyze operational data"""
         
-        print(f"\n⚙️ {self.name} analyzing operational efficiency...")
+        logger.info(f"{self.name} analyzing operational efficiency...")
         
         await asyncio.sleep(0.8)
         
@@ -442,12 +446,12 @@ class PredictiveAnalyticsAgent:
     
     def __init__(self, name: str = "Predictive Analytics Agent"):
         self.name = name
-        print(f"  ✓ {self.name} initialized")
+        logger.info(f"{self.name} initialized")
     
     async def analyze(self, data: Dict[str, Any]) -> BIReport:
         """Generate predictions"""
         
-        print(f"\n🔮 {self.name} generating predictions...")
+        logger.info(f"{self.name} generating predictions...")
         
         await asyncio.sleep(1.0)
         
@@ -510,9 +514,7 @@ class BusinessIntelligenceOrchestrator:
         self.ops_agent = OperationalAnalyticsAgent()
         self.predictive_agent = PredictiveAnalyticsAgent()
         
-        print("\n" + "="*60)
-        print("📊 BUSINESS INTELLIGENCE SYSTEM INITIALIZED")
-        print("="*60)
+        logger.info("BUSINESS INTELLIGENCE SYSTEM INITIALIZED")
     
     async def generate_executive_dashboard(self) -> Dict[str, Any]:
         """
@@ -525,14 +527,12 @@ class BusinessIntelligenceOrchestrator:
         4. Compile executive summary
         """
         
-        print(f"\n\n{'='*60}")
-        print(f"🎯 GENERATING EXECUTIVE DASHBOARD")
-        print(f"{'='*60}\n")
+        logger.info("GENERATING EXECUTIVE DASHBOARD")
         
         start_time = datetime.now()
         
         # Phase 1: Data Aggregation
-        print("[Phase 1] Aggregating Data from All Sources...")
+        logger.info("[Phase 1] Aggregating Data from All Sources...")
         
         data = await self.data_agent.aggregate_data([
             DataSource.SALES,
@@ -544,7 +544,7 @@ class BusinessIntelligenceOrchestrator:
         ])
         
         # Phase 2: Parallel Analytics
-        print("\n[Phase 2] Running Analytics Agents in Parallel...")
+        logger.info("[Phase 2] Running Analytics Agents in Parallel...")
         
         sales_res, marketing_res, finance_res, ops_res = await asyncio.gather(
             self.sales_agent.analyze(data),
@@ -555,7 +555,7 @@ class BusinessIntelligenceOrchestrator:
         )
         
         # Phase 3: Predictive Analytics
-        print("\n[Phase 3] Generating Predictions...")
+        logger.info("[Phase 3] Generating Predictions...")
         
         predictive_result = await self.predictive_agent.analyze(data)
         
@@ -584,7 +584,7 @@ class BusinessIntelligenceOrchestrator:
             detailed_reports["predictive"] = predictive_result
         
         # Phase 4: Executive Summary
-        print("\n[Phase 4] Compiling Executive Summary...")
+        logger.info("[Phase 4] Compiling Executive Summary...")
         
         executive_summary = self._compile_executive_summary(reports, data)
         
@@ -712,6 +712,12 @@ async def main():
     """
     Demonstrate business intelligence multi-agent system.
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        datefmt='%H:%M:%S'
+    )
     
     # Initialize orchestrator
     orchestrator = BusinessIntelligenceOrchestrator()
